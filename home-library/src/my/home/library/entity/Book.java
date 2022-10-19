@@ -34,6 +34,10 @@ public class Book {
 	public void setType(TypeOfBook type) {
 		this.type = type;
 	}
+	
+	public TypeOfBook getType() {
+		return type;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

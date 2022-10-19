@@ -9,6 +9,7 @@ public interface  UserDao {
 	 boolean registration(User user)throws DaoException;
 	 boolean logination (User user)throws DaoException;
 	 
+	 
 	
 
 }
