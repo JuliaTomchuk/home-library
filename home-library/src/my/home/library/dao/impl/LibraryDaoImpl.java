@@ -8,27 +8,33 @@ import my.home.library.entity.Book;
 public class LibraryDaoImpl implements LibraryDao{
 
 	@Override
-	public boolean addBook(Book book) {
+	public boolean addBook(Book book) throws DaoException{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Book findBook(Book book) {
+	public Book findBook(Book book)throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean deleteBook(Book book) {
+	public boolean deleteBook(Book book)throws DaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<Book> getAllBooks() {
+	public List<Book> getAllBooks()throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean addAllBooks(List<Book> books) throws DaoException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
