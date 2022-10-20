@@ -17,16 +17,15 @@ public class LibraryForAdminDaoImpl extends LibraryForUsersDaoImpl implements Li
 	private File file = new File("C:\\Users\\Aleksandr\\git\\library\\home-library\\src\\resource\\books.txt");
 
 	
-
 	@Override
 	public boolean addBook(Book book) throws DaoException {
 		
 		
 		try(BufferedWriter writer = new BufferedWriter( new FileWriter(file, true))){
-		
-		writer.newLine();
+			
 		
 		 writer.write(book.getName()+"/"+book.getAuthor()+"/"+book.getType());
+		 writer.newLine();
 		 
 		}catch(IOException e) {
 			throw new DaoException(e);

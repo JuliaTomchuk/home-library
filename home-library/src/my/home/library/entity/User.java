@@ -9,7 +9,7 @@ public class User {
 	private Role role;
 
 	
-	User(){
+	public User(){
 		
 	}
 

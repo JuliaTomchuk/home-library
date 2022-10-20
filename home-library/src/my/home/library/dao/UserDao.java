@@ -1,14 +1,13 @@
 package my.home.library.dao;
 
 import my.home.library.dao.impl.DaoException;
-import my.home.library.entity.RegistrationInfo;
 import my.home.library.entity.User;
 
 public interface  UserDao {
 	 
-	 boolean registration(User user)throws DaoException;
-	 boolean logination (User user)throws DaoException;
-	 
+	 User registration(User user)throws DaoException;
+	 User logination(String login, String password) throws DaoException;
+	 User editProfile(String login, String password, User editUser) throws DaoException;
 	 
 	
 
