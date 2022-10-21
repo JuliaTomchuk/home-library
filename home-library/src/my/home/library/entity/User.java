@@ -4,8 +4,6 @@ public class User {
 	
 	private String firstName;
 	private String secondName;
-	private String login;
-	private String password;
 	private Role role;
 
 	
@@ -14,12 +12,10 @@ public class User {
 	}
 
 
-	public User(String firstName, String secondName, String login, String password, Role role) {
+	public User(String firstName, String secondName, Role role) {
 		super();
 		this.firstName = firstName;
 		this.secondName = secondName;
-		this.login = login;
-		this.password = password;
 		this.role = role;
 	}
 
@@ -44,26 +40,6 @@ public class User {
 	}
 
 
-	public String getLogin() {
-		return login;
-	}
-
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
 	public Role getRole() {
 		return role;
 	}
@@ -79,8 +55,6 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((secondName == null) ? 0 : secondName.hashCode());
 		return result;
@@ -101,16 +75,7 @@ public class User {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
+			
 		if (role != other.role)
 			return false;
 		if (secondName == null) {
@@ -124,8 +89,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return  getClass().getSimpleName() +"[firstName=" + firstName + ", secondName=" + secondName + ", login=" + login + ", password="
-				+ password + ", role=" + role + "]";
+		return  getClass().getSimpleName() +"[firstName=" + firstName + ", " + "secondName= "+ secondName +   ", role=" + role + "]";
 	}
 	
 	
