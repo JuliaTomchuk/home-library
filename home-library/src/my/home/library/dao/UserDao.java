@@ -6,9 +6,9 @@ import my.home.library.entity.User;
 
 public interface  UserDao {
 	 
-	RegistrationInfo registration(RegistrationInfo info)throws DaoException;
-	 RegistrationInfo logination(RegistrationInfo info) throws DaoException;
-	 RegistrationInfo editProfile(RegistrationInfo info) throws DaoException;
+	User registration(RegistrationInfo info)throws DaoException;
+	User logination(RegistrationInfo info) throws DaoException;
+	RegistrationInfo editProfile(RegistrationInfo info) throws DaoException;
 	 
 	
 

@@ -20,18 +20,18 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User registration(RegistrationInfo info) throws DaoException {
-		//проверить есть ли пользователь с такими же registrationinfo
+		// проверить есть ли пользователь с такими же registrationinfo
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
 
-			writer.write(info.getFirstName() + "/" + info.getSecondName() + "/" + info.getRole() + "/"
-					+ info.getLogin() + "/" + info.getPassword() );
+			writer.write(info.getFirstName() + "/" + info.getSecondName() + "/" + info.getRole() + "/" + info.getLogin()
+					+ "/" + info.getPassword());
 			writer.newLine();
 
 		} catch (IOException e) {
 			throw new DaoException(e);
 		}
-		
-		return new User(info.getFirstName(),info.getSecondName(),info.getRole());
+
+		return new User(info.getFirstName(), info.getSecondName(), info.getRole());
 	}
 
 	@Override
@@ -52,10 +52,10 @@ public class UserDaoImpl implements UserDao {
 
 			while (line != null) {
 				String[] arr = line.split("/");
-				RegistrationInfo info = new RegistrationInfo(arr[0],arr[1],Role.valueOf(arr[2]));
+				RegistrationInfo info = new RegistrationInfo(arr[0], arr[1], Role.valueOf(arr[2]));
 				info.setLogin(arr[3]);
 				info.setPassword(arr[4]);
-				usersRegistrationInfo.add(info );
+				usersRegistrationInfo.add(info);
 				line = reader.readLine();
 			}
 		} catch (IOException e) {
@@ -64,13 +64,16 @@ public class UserDaoImpl implements UserDao {
 		return usersRegistrationInfo;
 	}
 
-	private RegistrationInfo findUser(RegistrationInfo info, List<RegistrationInfo> usersRegistrationInfo) throws DaoException {
+	private RegistrationInfo findUser(RegistrationInfo info, List<RegistrationInfo> usersRegistrationInfo)
+			throws DaoException {
 
 		RegistrationInfo result = new RegistrationInfo();
 
 		for (int i = 0; i < usersRegistrationInfo.size(); i++) {
-			if (usersRegistrationInfo.get(i).getPassword().equals(info.getPassword()) && usersRegistrationInfo.get(i).getLogin().equals(info.getLogin())) {
-				result =new RegistrationInfo( usersRegistrationInfo.get(i).getFirstName(),usersRegistrationInfo.get(i).getSecondName(),usersRegistrationInfo.get(i).getRole());
+			if (usersRegistrationInfo.get(i).getPassword().equals(info.getPassword())
+					&& usersRegistrationInfo.get(i).getLogin().equals(info.getLogin())) {
+				result = new RegistrationInfo(usersRegistrationInfo.get(i).getFirstName(),
+						usersRegistrationInfo.get(i).getSecondName(), usersRegistrationInfo.get(i).getRole());
 				result.setPassword(usersRegistrationInfo.get(i).getPassword());
 				result.setLogin(usersRegistrationInfo.get(i).getLogin());
 			} else {
@@ -91,15 +94,15 @@ public class UserDaoImpl implements UserDao {
 		return info;
 	}
 
-	private void updateUsers(List<User> users) throws DaoException {
+	private void updateUsers(List<RegistrationInfo> usersRegistrationInfo) throws DaoException {
 
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
 
-			for (int i = 0; i < users.size(); i++) {
-				User user = users.get(i);
+			for (int i = 0; i < usersRegistrationInfo.size(); i++) {
+				RegistrationInfo info = usersRegistrationInfo.get(i);
 
-				writer.write(user.getFirstName() + "/" + user.getSecondName() + "/" + user.getLogin() + "/"
-						+ user.getPassword() + "/" + user.getRole());
+				writer.write(info.getFirstName() + "/" + info.getSecondName() + "/" + info.getLogin() + "/"
+						+ info.getRole() + info.getLogin() + "/" + info.getPassword());
 				writer.newLine();
 
 			}
