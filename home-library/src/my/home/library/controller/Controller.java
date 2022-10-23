@@ -1,5 +1,8 @@
 package my.home.library.controller;
 
-public class Controller {
+public interface Controller {
+	
+	
+	String doAction(String request);
 
 }

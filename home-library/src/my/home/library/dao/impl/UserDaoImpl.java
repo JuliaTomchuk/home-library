@@ -20,7 +20,11 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User registration(RegistrationInfo info) throws DaoException {
-		// проверить есть ли пользователь с такими же registrationinfo
+
+		if (isDuplicate(info)) {
+			throw new DaoException("The user with such password or login already exists!");
+		}
+
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
 
 			writer.write(info.getFirstName() + "/" + info.getSecondName() + "/" + info.getRole() + "/" + info.getLogin()
@@ -84,11 +88,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public RegistrationInfo editProfile(RegistrationInfo info) throws DaoException {
+	public RegistrationInfo editProfile(RegistrationInfo info, RegistrationInfo edit) throws DaoException {
+
 		List<RegistrationInfo> usersRegistrationInfo = getAllUsersRegistrationInfo();
+
 		RegistrationInfo userBeforeEditon = findUser(info, usersRegistrationInfo);
+
 		usersRegistrationInfo.remove(userBeforeEditon);
-		usersRegistrationInfo.add(info);
+
+		usersRegistrationInfo.add(edit);
+
 		updateUsers(usersRegistrationInfo);
 
 		return info;
@@ -110,6 +119,25 @@ public class UserDaoImpl implements UserDao {
 		} catch (IOException e) {
 			throw new DaoException();
 		}
+
+	}
+
+	private boolean isDuplicate(RegistrationInfo info) throws DaoException {
+
+		String newLogin = info.getLogin();
+		String newPassword = info.getPassword();
+
+		List<RegistrationInfo> usersRegistrationInfo = getAllUsersRegistrationInfo();
+
+		for (int i = 0; i < usersRegistrationInfo.size(); i++) {
+			String login = usersRegistrationInfo.get(i).getLogin();
+			String password = usersRegistrationInfo.get(i).getPassword();
+			if (newLogin.equals(login) || newPassword.equals(password))
+				return true;
+
+		}
+
+		return false;
 
 	}
 

@@ -5,17 +5,17 @@ import java.util.List;
 import my.home.library.dao.DaoProvider;
 import my.home.library.dao.impl.DaoException;
 import my.home.library.entity.Book;
-import my.home.library.service.BookValidator;
 import my.home.library.service.LibraryServiceForAdministrator;
+import my.home.library.service.Validator;
 
 public class LibraryServiceForAdministratorImpl extends LibraryServiceForUserImpl  implements LibraryServiceForAdministrator {
 
 	private DaoProvider dao = DaoProvider.getInstance();
-	private BookValidator validator = new BookValidatorImpl();
+	private Validator<Book> validator = new BookValidator();
 	
 	@Override
 	public boolean addBook(Book book) throws ServiceException {
-		if(!(validator.checkBook(book))) {
+		if(!(validator.isValid(book))) {
 			throw new ServiceException();
 		}
 		boolean isAdd=false;
@@ -30,7 +30,7 @@ public class LibraryServiceForAdministratorImpl extends LibraryServiceForUserImp
 
 	@Override
 	public boolean addAllBooks(List<Book> books) throws ServiceException {
-		if(!(validator.checkAllBooks(books))) {
+		if(!(validator.isValid(books))) {
 			throw new ServiceException();
 		}
 		boolean isAdd=false;
@@ -47,7 +47,7 @@ public class LibraryServiceForAdministratorImpl extends LibraryServiceForUserImp
 
 	@Override
 	public boolean deleteBook(Book book) throws ServiceException {
-		if(!(validator.checkBook(book))) {
+		if(!(validator.isValid(book))) {
 			throw new ServiceException();
 		}
 		 boolean isDeleted=false;
@@ -62,7 +62,7 @@ public class LibraryServiceForAdministratorImpl extends LibraryServiceForUserImp
 
 	@Override
 	public boolean updateAllBooks(List<Book> books) throws ServiceException  {
-		if(!(validator.checkAllBooks(books))) {
+		if(!(validator.isValid(books))) {
 			throw new ServiceException();
 		}
 		boolean isUpdated=false;

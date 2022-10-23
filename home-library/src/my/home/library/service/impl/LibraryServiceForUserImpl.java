@@ -6,16 +6,17 @@ import java.util.List;
 import my.home.library.dao.DaoProvider;
 import my.home.library.dao.impl.DaoException;
 import my.home.library.entity.Book;
-import my.home.library.service.BookValidator;
 import my.home.library.service.LibraryServiceForUser;
+import my.home.library.service.Validator;
 
 public class LibraryServiceForUserImpl implements LibraryServiceForUser {
 	private DaoProvider dao = DaoProvider.getInstance();
-	private BookValidator validator = new BookValidatorImpl();
+	private Validator <Book> validator= new BookValidator();
+	
 	
 	@Override
 	public Book getBook(Book book) throws ServiceException {
-		if(!(validator.checkBook(book))) {
+		if(!(validator.isValid(book))) {
 			throw new ServiceException();
 		}
 		

@@ -1,26 +1,59 @@
 package my.home.library.service.impl;
 
+import my.home.library.dao.DaoProvider;
+import my.home.library.dao.UserDao;
+import my.home.library.dao.impl.DaoException;
+import my.home.library.entity.RegistrationInfo;
 import my.home.library.entity.User;
 import my.home.library.service.UserService;
+import my.home.library.service.Validator;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
+	private DaoProvider daoProvider = DaoProvider.getInstance();
+	private UserDao userDao = daoProvider.getUserDao();
+	private Validator<RegistrationInfo> validator = new RegistrationInfoValidator();
 
 	@Override
-	public User logination(String login, String password) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+	public User logination(RegistrationInfo info) throws ServiceException {
+		User user = new User();
+		try {
+			userDao.logination(info);
+		} catch (DaoException e) {
+			throw new ServiceException();
+		}
+		return user;
 	}
 
 	@Override
-	public User registration(User user) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+	public User registration(RegistrationInfo info) throws ServiceException {
+		if (!(validator.isValid(info))) {
+			throw new ServiceException();
+		}
+
+		User user;
+		try {
+			user = userDao.registration(info);
+		} catch (DaoException e) {
+			throw new ServiceException();
+		}
+
+		return user;
 	}
 
 	@Override
-	public User editProfile() throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+	public User editProfile(RegistrationInfo info, RegistrationInfo edit) throws ServiceException {
+		if (!(validator.isValid(info)) || !(validator.isValid(edit))) {
+			throw new ServiceException();
+		}
+		User user = new User();
+		try {
+			user = userDao.editProfile(info, edit);
+		} catch (DaoException e) {
+			throw new ServiceException();
+		}
+
+		return user;
 	}
 
 }

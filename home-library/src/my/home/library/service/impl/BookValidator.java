@@ -3,22 +3,22 @@ package my.home.library.service.impl;
 import java.util.List;
 
 import my.home.library.entity.Book;
-import my.home.library.service.BookValidator;
+import my.home.library.service.Validator;
 
-public class BookValidatorImpl implements BookValidator {
+public class BookValidator implements Validator <Book>{
 
 	@Override
-	public boolean checkBook(Book book) {
+	public boolean isValid(Book book) {
 			
 			return !(book.getName()==null||book.getAuthor()==null||book.getType()==null);
 			}
 
 	@Override
-	public boolean checkAllBooks(List<Book> books) {
+	public boolean isValid(List<Book> books) {
 		
 		for(int i=0;i<books.size();i++) {
 			Book book = books.get(i);
-			if(book.getName()==null||book.getAuthor()==null||book.getType()==null) {
+			if(!isValid(book)) {
 				return false;
 			}
 		}
