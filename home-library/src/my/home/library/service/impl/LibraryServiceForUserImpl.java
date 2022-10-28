@@ -10,7 +10,7 @@ import my.home.library.service.LibraryServiceForUser;
 import my.home.library.service.Validator;
 
 public class LibraryServiceForUserImpl implements LibraryServiceForUser {
-	private DaoProvider dao = DaoProvider.getInstance();
+	private DaoProvider dao= DaoProvider.getInstance();
 	private Validator <Book> validator= new BookValidator();
 	
 	

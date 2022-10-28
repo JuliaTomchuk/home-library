@@ -16,11 +16,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User logination(RegistrationInfo info) throws ServiceException {
+		if (info.getPassword()==null ||info.getLogin()==null) {
+			throw new ServiceException("Regestration info isn't correct");
+		}
 		User user = new User();
 		try {
-			userDao.logination(info);
+			user =userDao.logination(info);
 		} catch (DaoException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 		return user;
 	}
@@ -28,14 +31,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registration(RegistrationInfo info) throws ServiceException {
 		if (!(validator.isValid(info))) {
-			throw new ServiceException();
+			throw new ServiceException("Regestration info isn't correct");
 		}
 
 		User user;
 		try {
 			user = userDao.registration(info);
 		} catch (DaoException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 
 		return user;
@@ -43,14 +46,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User editProfile(RegistrationInfo info, RegistrationInfo edit) throws ServiceException {
-		if (!(validator.isValid(info)) || !(validator.isValid(edit))) {
-			throw new ServiceException();
+		if (info.getPassword()==null ||info.getLogin()==null ||!(validator.isValid(edit))) {
+			throw new ServiceException("Regestration info isn't correct");
 		}
 		User user = new User();
 		try {
 			user = userDao.editProfile(info, edit);
 		} catch (DaoException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 
 		return user;

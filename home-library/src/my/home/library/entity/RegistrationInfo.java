@@ -2,6 +2,8 @@ package my.home.library.entity;
 
 public class RegistrationInfo extends User {
 	
+	
+
 	private String login;
 	private String password;
 	
@@ -56,6 +58,12 @@ public class RegistrationInfo extends User {
 		} else if (!password.equals(other.password))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "RegistrationInfo [login=" + login + ", password=" + password + ", firstName =" + getFirstName()
+				+ ", secondName =" + getSecondName() + ", role=" + getRole() + "]";
 	}
 	
 	

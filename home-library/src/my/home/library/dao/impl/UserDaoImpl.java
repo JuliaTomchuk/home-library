@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import my.home.library.dao.UserDao;
@@ -16,7 +17,7 @@ import my.home.library.entity.User;
 
 public class UserDaoImpl implements UserDao {
 
-	private File file = new File("C:\\Users\\Aleksandr\\git\\library\\home-library\\src\\resource\\users.txt");
+	private File file = new File("C:\\Users\\Шипотяне\\git\\home-library\\home-library\\src\\resource\\users.txt");
 
 	@Override
 	public User registration(RegistrationInfo info) throws DaoException {
@@ -56,6 +57,7 @@ public class UserDaoImpl implements UserDao {
 
 			while (line != null) {
 				String[] arr = line.split("/");
+
 				RegistrationInfo info = new RegistrationInfo(arr[0], arr[1], Role.valueOf(arr[2]));
 				info.setLogin(arr[3]);
 				info.setPassword(arr[4]);
@@ -63,7 +65,7 @@ public class UserDaoImpl implements UserDao {
 				line = reader.readLine();
 			}
 		} catch (IOException e) {
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 		return usersRegistrationInfo;
 	}
@@ -71,7 +73,7 @@ public class UserDaoImpl implements UserDao {
 	private RegistrationInfo findUser(RegistrationInfo info, List<RegistrationInfo> usersRegistrationInfo)
 			throws DaoException {
 
-		RegistrationInfo result = new RegistrationInfo();
+		RegistrationInfo result = null;
 
 		for (int i = 0; i < usersRegistrationInfo.size(); i++) {
 			if (usersRegistrationInfo.get(i).getPassword().equals(info.getPassword())
@@ -80,15 +82,18 @@ public class UserDaoImpl implements UserDao {
 						usersRegistrationInfo.get(i).getSecondName(), usersRegistrationInfo.get(i).getRole());
 				result.setPassword(usersRegistrationInfo.get(i).getPassword());
 				result.setLogin(usersRegistrationInfo.get(i).getLogin());
-			} else {
-				throw new DaoException("No such user");
+				return result;
 			}
 		}
+		if (result == null) {
+			throw new DaoException("No such user");
+		}
+
 		return result;
 	}
 
 	@Override
-	public RegistrationInfo editProfile(RegistrationInfo info, RegistrationInfo edit) throws DaoException {
+	public User editProfile(RegistrationInfo info, RegistrationInfo edit) throws DaoException {
 
 		List<RegistrationInfo> usersRegistrationInfo = getAllUsersRegistrationInfo();
 
@@ -96,11 +101,19 @@ public class UserDaoImpl implements UserDao {
 
 		usersRegistrationInfo.remove(userBeforeEditon);
 
+		updateUsers(usersRegistrationInfo);
+
+		if (isDuplicate(edit)) {
+			usersRegistrationInfo.add(info);
+			updateUsers(usersRegistrationInfo);
+			throw new DaoException("The user with such password or login already exists!");
+		}
+
 		usersRegistrationInfo.add(edit);
 
 		updateUsers(usersRegistrationInfo);
 
-		return info;
+		return new User(edit.getFirstName(), edit.getSecondName(), edit.getRole());
 	}
 
 	private void updateUsers(List<RegistrationInfo> usersRegistrationInfo) throws DaoException {
@@ -110,8 +123,8 @@ public class UserDaoImpl implements UserDao {
 			for (int i = 0; i < usersRegistrationInfo.size(); i++) {
 				RegistrationInfo info = usersRegistrationInfo.get(i);
 
-				writer.write(info.getFirstName() + "/" + info.getSecondName() + "/" + info.getLogin() + "/"
-						+ info.getRole() + info.getLogin() + "/" + info.getPassword());
+				writer.write(info.getFirstName() + "/" + info.getSecondName() + "/" + info.getRole() + "/"
+						+ info.getLogin() + "/" + info.getPassword());
 				writer.newLine();
 
 			}

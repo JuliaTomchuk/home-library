@@ -10,6 +10,6 @@ public interface UserDao {
 
 	User logination(RegistrationInfo info) throws DaoException;
 
-	RegistrationInfo editProfile(RegistrationInfo info, RegistrationInfo edit) throws DaoException;
+	User editProfile(RegistrationInfo info, RegistrationInfo edit) throws DaoException;
 
 }

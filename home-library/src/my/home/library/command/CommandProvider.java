@@ -32,7 +32,7 @@ public class CommandProvider {
 		commands.put(CommandName.UPDATE_ALL_BOOKS, new UpdateAllBooks());
 		
 	}
-	
+	//если нет такого ключа вызывать но комманд
 	public Command getCommand(String commandName) {
 		
 		CommandName name = CommandName.valueOf(commandName.toUpperCase());

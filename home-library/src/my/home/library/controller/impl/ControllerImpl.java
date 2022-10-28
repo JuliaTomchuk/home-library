@@ -14,7 +14,7 @@ public class ControllerImpl implements Controller {
 	public String doAction(String request) {
 		String response="";
 		
-		String [] param = request.split("\\s+");
+		String [] param = request.split("/");
 		
 		
 		Command command=commandProvider.getCommand(param[0]);
@@ -23,5 +23,7 @@ public class ControllerImpl implements Controller {
 		
 		return response;
 	}
+	
+	
 
 }
