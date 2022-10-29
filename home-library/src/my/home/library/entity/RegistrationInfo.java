@@ -1,5 +1,7 @@
 package my.home.library.entity;
 
+import java.util.Base64;
+
 public class RegistrationInfo extends User {
 	
 	
@@ -22,11 +24,11 @@ public class RegistrationInfo extends User {
 	}
 
 	public String getPassword() {
-		return password;
+		return new String(Base64.getDecoder().decode(password));
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Base64.getEncoder().encodeToString(password.getBytes());
 	}
 
 	@Override

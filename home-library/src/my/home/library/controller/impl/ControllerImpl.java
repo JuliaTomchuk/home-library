@@ -8,7 +8,7 @@ public class ControllerImpl implements Controller {
 	
 	private CommandProvider commandProvider = new CommandProvider();
 	
-	//registration firstName secondName role login password
+	
 
 	@Override
 	public String doAction(String request) {
