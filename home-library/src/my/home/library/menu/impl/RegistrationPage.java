@@ -1,12 +1,14 @@
-package my.home.library.menu;
+package my.home.library.menu.impl;
 
 import java.util.Scanner;
 
+import my.home.library.menu.Page;
 
 
-public class RegistrationPage {
 
-	
+public class RegistrationPage  implements Page{
+
+	@Override
 	public String getRequest() {
 		
 		@SuppressWarnings("resource")

@@ -8,11 +8,14 @@ import my.home.library.controller.Controller;
 import my.home.library.controller.impl.ControllerImpl;
 import my.home.library.entity.RegistrationInfo;
 import my.home.library.entity.Role;
-import my.home.library.menu.GreetingPage;
-import my.home.library.menu.LoginationPage;
 import my.home.library.menu.Menu;
 import my.home.library.menu.MenuProvider;
-import my.home.library.menu.RegistrationPage;
+import my.home.library.menu.impl.AccessControl;
+import my.home.library.menu.impl.GreetingPage;
+import my.home.library.menu.impl.LoginationPage;
+import my.home.library.menu.impl.MenuForAdministrator;
+import my.home.library.menu.impl.MenuForSimpleUser;
+import my.home.library.menu.impl.RegistrationPage;
 
 public class Main {
 
@@ -39,6 +42,17 @@ public class Main {
 			}
 		
 		String registrationInfo = controller.doAction(request);
+		AccessControl accessControl= new AccessControl();
+		
+		Role role= accessControl.determineRole(registrationInfo);
+		
+		switch(role) {
+		case SIMPLE_USER:
+			new MenuForSimpleUser().getRequest();
+			
+		case ADMINISTRATOR:
+			new MenuForAdministrator().getRequest();
+		}
 		
 //		String regex="ADMINISTRATOR|SIMPLE_USER";
 //		Pattern pattern = Pattern.compile(regex);

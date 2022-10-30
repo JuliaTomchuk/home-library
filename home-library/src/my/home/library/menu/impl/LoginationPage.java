@@ -1,11 +1,14 @@
-package my.home.library.menu;
+package my.home.library.menu.impl;
 
 import java.util.Scanner;
 
-public class LoginationPage {
+import my.home.library.menu.Page;
+
+public class LoginationPage implements Page {
 	
 	public String getRequest() {
 		String request="logination/";
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		
 		

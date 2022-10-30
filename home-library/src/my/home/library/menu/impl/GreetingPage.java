@@ -1,18 +1,20 @@
-package my.home.library.menu;
+package my.home.library.menu.impl;
 
 import java.util.Scanner;
 
+import my.home.library.menu.Page;
 
 
-public class GreetingPage{
+
+public class GreetingPage implements Page{
 
 	
-	public void print() {
-		System.out.println("Welcome to my library! \n  Press 1 for logination \n Press 2 for registration");	
-		
-	}
-
+	
+  @Override
 	public String getRequest() {
+		
+		System.out.println("Welcome to my library! \n  Press 1 for logination \n Press 2 for registration");
+		
 		int result=0;
   @SuppressWarnings("resource")
   Scanner scanner = new Scanner(System.in);
