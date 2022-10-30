@@ -10,7 +10,7 @@ public class UserViewerImpl implements UserViewer {
 
 			System.out.println(response);
 			System.out.println(user.toString());
-			return response;
+			return response +user.toString();
 		} else {
 			response = "Something went wrong";
 			System.out.println(response);

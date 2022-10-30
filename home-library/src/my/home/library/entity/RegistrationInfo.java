@@ -24,11 +24,11 @@ public class RegistrationInfo extends User {
 	}
 
 	public String getPassword() {
-		return new String(Base64.getDecoder().decode(password));
+		return password;
 	}
 
 	public void setPassword(String password) {
-		this.password = Base64.getEncoder().encodeToString(password.getBytes());
+		this.password = password;
 	}
 
 	@Override

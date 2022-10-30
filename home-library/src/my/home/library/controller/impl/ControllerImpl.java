@@ -16,7 +16,9 @@ public class ControllerImpl implements Controller {
 		
 		String [] param = request.split("/");
 		
-		
+		if(param.length<1) {
+			System.out.println("Reastart and fill all gaps");
+		}
 		Command command=commandProvider.getCommand(param[0]);
 		response = command.execute(param);
 				

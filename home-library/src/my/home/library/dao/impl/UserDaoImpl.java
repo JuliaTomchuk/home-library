@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 import my.home.library.dao.UserDao;
@@ -17,7 +18,7 @@ import my.home.library.entity.User;
 
 public class UserDaoImpl implements UserDao {
 
-	private File file = new File("C:\\Users\\Шипотяне\\git\\home-library\\home-library\\src\\resource\\users.txt");
+	private File file = new File("C:\\Users\\Aleksandr\\git\\library\\home-library\\src\\resource\\users.txt");
 
 	@Override
 	public User registration(RegistrationInfo info) throws DaoException {
@@ -29,14 +30,14 @@ public class UserDaoImpl implements UserDao {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
 
 			writer.write(info.getFirstName() + "/" + info.getSecondName() + "/" + info.getRole() + "/" + info.getLogin()
-					+ "/" + info.getPassword());
+					+ "/" + encrypt(info.getPassword()));
 			writer.newLine();
 
 		} catch (IOException e) {
 			throw new DaoException(e);
 		}
 
-		return new User(info.getFirstName(), info.getSecondName(), info.getRole());
+		return info;
 	}
 
 	@Override
@@ -54,15 +55,19 @@ public class UserDaoImpl implements UserDao {
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
 			String line = reader.readLine();
+			
+			
 
 			while (line != null) {
 				String[] arr = line.split("/");
-
+				
 				RegistrationInfo info = new RegistrationInfo(arr[0], arr[1], Role.valueOf(arr[2]));
 				info.setLogin(arr[3]);
-				info.setPassword(arr[4]);
+				info.setPassword(decrypt(arr[4]));
+				
 				usersRegistrationInfo.add(info);
 				line = reader.readLine();
+				
 			}
 		} catch (IOException e) {
 			throw new DaoException(e);
@@ -124,7 +129,7 @@ public class UserDaoImpl implements UserDao {
 				RegistrationInfo info = usersRegistrationInfo.get(i);
 
 				writer.write(info.getFirstName() + "/" + info.getSecondName() + "/" + info.getRole() + "/"
-						+ info.getLogin() + "/" + info.getPassword());
+						+ info.getLogin() + "/" + encrypt(info.getPassword()));
 				writer.newLine();
 
 			}
@@ -152,6 +157,14 @@ public class UserDaoImpl implements UserDao {
 
 		return false;
 
+	}
+	
+	private String encrypt(String password) {
+		return Base64.getEncoder().encodeToString(password.getBytes());
+	}
+	
+	private String decrypt(String password) {
+		return new String(Base64.getDecoder().decode(password));
 	}
 
 }

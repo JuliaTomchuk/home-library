@@ -14,7 +14,7 @@ import my.home.library.dao.LibraryForUsersDao;
 import my.home.library.entity.Book;
 
 public class LibraryForAdminDaoImpl extends LibraryForUsersDaoImpl implements LibraryForAdminDao {
-	private File file = new File("C:\\Users\\Шипотяне\\git\\home-library\\home-library\\src\\resource\\books.txt");
+	private File file = new File("C:\\Users\\Aleksandr\\git\\library\\home-library\\src\\resource\\books.txt");
 	private LibraryForUsersDao libraryForUserDao =new LibraryForUsersDaoImpl();
 
 	@Override

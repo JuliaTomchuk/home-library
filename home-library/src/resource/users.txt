@@ -1,3 +1,5 @@
-julia/muraviova/ADMINISTRATOR/JUliaMuraviova/123
-Julia/Tomchuk/ADMINISTRATOR/Ulka/MTIzNDU=
-jan/tom/ADMINISTRATOR/jantom/12345
+Julia/Tomchuk/SIMPLE_USER/Ulka/MTIzNDU=
+jan/tom/ADMINISTRATOR/jantom/MTIzNDU2Nzg5
+lesha/malukov/ADMINISTRATOR/ALEX/MTIzNDU2Nw==
+Alexsander/Tomchuk/ADMINISTRATOR/AlexT/MzIx
+Oksana/Postil/ADMINISTRATOR/Artos/MTIzNDU2Nzg5MDA5ODc2NTQzMjE=

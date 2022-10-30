@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
 		} catch (DaoException e) {
 			throw new ServiceException(e);
 		}
+		
 		return user;
 	}
 
