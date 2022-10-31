@@ -18,7 +18,7 @@ import my.home.library.entity.User;
 
 public class UserDaoImpl implements UserDao {
 
-	private File file = new File("C:\\Users\\Aleksandr\\git\\library\\home-library\\src\\resource\\users.txt");
+	private File file = new File("C:\\Users\\Шипотяне\\git\\home-library\\home-library\\src\\resource\\users.txt");
 
 	@Override
 	public User registration(RegistrationInfo info) throws DaoException {

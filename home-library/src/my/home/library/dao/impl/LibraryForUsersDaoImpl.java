@@ -12,7 +12,7 @@ import my.home.library.entity.Book;
 import my.home.library.entity.TypeOfBook;
 
 public class LibraryForUsersDaoImpl implements LibraryForUsersDao{
-	private File file = new File("C:\\Users\\Aleksandr\\git\\library\\home-library\\src\\resource\\books.txt");
+	private File file = new File("C:\\Users\\Шипотяне\\git\\home-library\\home-library\\src\\resource\\books.txt");
 
 	@Override
 	public Book getBook(Book book) throws DaoException {
@@ -37,6 +37,7 @@ List<Book> books = new ArrayList<>();
 			String line = reader.readLine();
 			while (line != null) {
 				String[] names = line.split("/");
+				System.out.println(names);
 				books.add(new Book(names[0], names[1], TypeOfBook.valueOf(names[2])));
 				line = reader.readLine();
 			}
