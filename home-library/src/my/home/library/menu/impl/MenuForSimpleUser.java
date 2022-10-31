@@ -1,14 +1,22 @@
 package my.home.library.menu.impl;
 
+import java.util.HashMap;
+
+import java.util.Map;
 import java.util.Scanner;
+
 
 import my.home.library.menu.Menu;
 import my.home.library.menu.Page;
 
 public class MenuForSimpleUser implements Menu{
 	
-	private 
-	public MenuForSimpleUser() {}
+	private Map <Integer,Page> pages= new HashMap<>();
+	public MenuForSimpleUser() {
+		pages.put(1, new EditUserPage());
+		pages.put(2, new GetAllBooksPage());
+		pages.put(3, new GetBookPage());
+	}
 	
 	@Override
 	public Page chooseOperation() {
@@ -24,18 +32,10 @@ public class MenuForSimpleUser implements Menu{
 			result=scanner.nextInt();
 		}
 		
-		switch(result) {
-		case 1: 
-			new EditUserPage().getRequest();
-			break;
-		case 2: 
-			new GetAllBooksPage().getRequest();
-			break;
-		case 3:
-			new GetBookPage().getRequest();
-			break;
+		 return pages.get(result);
+		
 		
 		}
 	}
 
-}
+

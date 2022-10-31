@@ -24,7 +24,7 @@ public class AddAllBooks implements Command {
 		String response;
 		List <Book> library = new ArrayList<>();
 		for(int i =1;i<params.length;i++) {
-			library.add(new Book(params[i],params[++i],TypeOfBook.valueOf(params[++i])));
+			library.add(new Book(params[i],params[++i],TypeOfBook.valueOf(params[++i].toUpperCase())));
 			
 		}
 		boolean isAdded = false;

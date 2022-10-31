@@ -9,7 +9,7 @@ import my.home.library.controller.impl.ControllerImpl;
 import my.home.library.entity.RegistrationInfo;
 import my.home.library.entity.Role;
 import my.home.library.menu.Menu;
-import my.home.library.menu.MenuProvider;
+import my.home.library.menu.Page;
 import my.home.library.menu.impl.AccessControl;
 import my.home.library.menu.impl.GreetingPage;
 import my.home.library.menu.impl.LoginationPage;
@@ -28,7 +28,7 @@ public class Main {
 		
 		GreetingPage greeting = new GreetingPage();
 		
-		greeting.print();
+		
 		String result = greeting.getRequest();
 		
 		
@@ -45,36 +45,23 @@ public class Main {
 		AccessControl accessControl= new AccessControl();
 		
 		Role role= accessControl.determineRole(registrationInfo);
+		Page page=null;
 		
 		switch(role) {
 		case SIMPLE_USER:
-			new MenuForSimpleUser().getRequest();
+			page=new MenuForSimpleUser().chooseOperation();
+			break;
 			
 		case ADMINISTRATOR:
-			new MenuForAdministrator().getRequest();
+			page=new MenuForAdministrator().chooseOperation();
+			
+			break;
 		}
 		
-//		String regex="ADMINISTRATOR|SIMPLE_USER";
-//		Pattern pattern = Pattern.compile(regex);
-//	    Matcher matcher = pattern.matcher(registrationInfo);
-//	    Role role=Role.SIMPLE_USER;
-//	    while (matcher.find()) {
-//	      role=Role.valueOf(matcher.group());
-//	    }
-//	    
-//	    switch(role) {
-//	    case ADMINISTRATOR:
-//	    	System.out.println(
-//	    		" 1 - ADD ALL books \n 2 - ADD BOOK \n 3 - DELETE BOOK \n 4 - EDIT USER \n 5 - GET ALL BOOKS \n"
-//	    		+ " 6 - GET BOOK \n 7 - UPDATE ALL BOOKS");
-//	    	
-//	    	break;
-//	    case SIMPLE_USER:
-//	    	System.out.println(
-//		    		" 1 - EDIT USER \n 2 - GET ALL BOOKS \n 3 - GET BOOK");
-//	    	break;
-//	    }
-//     
+	controller.doAction(page.getRequest());
+		
+		
+  
 }
 		
 		

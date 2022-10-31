@@ -5,7 +5,7 @@ import my.home.library.menu.Page;
 public class GetAllBooksPage implements Page {
 	@Override
 	public String getRequest() {
-		return null;
+		return "GET_ALL_BOOKS/";
 		
 	}
 

@@ -30,24 +30,24 @@ public class MenuForAdministrator implements Menu {
     		+ " 6 - GET BOOK \n 7 - UPDATE ALL BOOKS");
 	
 	
-	int result=0;
-	
+  int result=0;
 	@SuppressWarnings("resource")
 	Scanner scanner = new Scanner(System.in);
 	
 	while(result<1||result>7) {
+		
 		while(!scanner.hasNextInt()) {
 			scanner.nextLine();
 		}
-		
+		result=scanner.nextInt();
 	}
 	
-	result=scanner.nextInt();
+	 return pages.get(result);
 	
-	  return pages.get(result);
 	
+	}
 	
 	
 	}
 
-}
+

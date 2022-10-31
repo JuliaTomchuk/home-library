@@ -19,7 +19,7 @@ public class AddBook implements Command{
 	@Override
 	public String execute(String[] params) {
 		String response;
-		Book book = new Book(params[1], params[2], TypeOfBook.valueOf(params[3]));
+		Book book = new Book(params[1], params[2], TypeOfBook.valueOf(params[3].toUpperCase()));
 		
 		boolean isAdded=false;
 		try {
